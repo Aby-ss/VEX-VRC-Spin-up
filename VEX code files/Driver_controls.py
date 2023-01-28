@@ -46,7 +46,7 @@ def onevent_controller_1buttonL1_pressed_0():
         wait(5, MSEC)
     FiringMotorGroup.set_stopping(HOLD)
     FiringMotorGroup.stop()
-
+    FiringMotorGroup.spin_to_position(90, DEGREES, wait=True)
     # Add "Come back Motion" code
 
 def onevent_controller_1buttonL2_pressed_0():
