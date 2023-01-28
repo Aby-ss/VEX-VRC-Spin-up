@@ -47,6 +47,8 @@ def onevent_controller_1buttonL1_pressed_0():
     FiringMotorGroup.set_stopping(HOLD)
     FiringMotorGroup.stop()
 
+    # Add "Come back Motion" code
+
 def onevent_controller_1buttonL2_pressed_0():
     global myVariable, message1, ResetArm
     FiringMotorGroup.spin(REVERSE)
