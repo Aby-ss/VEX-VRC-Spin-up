@@ -10,6 +10,13 @@ def when_started1():
     EndgameMotor.set_velocity(50, PERCENT)
     EndgameMotor.set_stopping(HOLD)
 
+def onevent_controller_1buttonR2_pressed_0():
+    global myVariable, message1, ResetArm
+    IntakeMotor.spin(REVERSE)
+    while not not controller_1.buttonR2.pressing():
+        wait(5, MSEC)
+    IntakeMotor.stop()
+
 def onevent_controller_1buttonB_pressed_0():
     global myVariable, message1, ResetArm
     EndgameMotor.spin_for(FORWARD, 1, TURNS, wait=True)
@@ -18,12 +25,16 @@ def onevent_controller_1buttonB_pressed_0():
     EndgameMotor.set_stopping(HOLD)
     EndgameMotor.stop()
 
-def onevent_controller_1buttonR2_pressed_0():
+def onevent_controller_1buttonY_pressed_0():
     global myVariable, message1, ResetArm
-    IntakeMotor.spin(REVERSE)
-    while not not controller_1.buttonR2.pressing():
-        wait(5, MSEC)
-    IntakeMotor.stop()
+    drivetrain.turn_for(RIGHT, -80, DEGREES, wait=True)
+    drivetrain.drive_for(FORWARD, 1150, MM, wait=True)
+    drivetrain.turn_for(LEFT, 80, DEGREES, wait=True)
+    wait(5, SECONDS)
+    drivetrain.turn_for(LEFT, 180, DEGREES, wait=True)
+    drivetrain.drive_for(REVERSE, 400, MM, wait=True)
+    drivetrain.turn_for(RIGHT, 80, DEGREES, wait=True)
+    drivetrain.drive_for(FORWARD, 600, MM, wait=True)
 
 def onauton_autonomous_0():
     global myVariable, message1, ResetArm
@@ -42,12 +53,10 @@ def onevent_controller_1buttonR1_pressed_0():
 def onevent_controller_1buttonL1_pressed_0():
     global myVariable, message1, ResetArm
     FiringMotorGroup.spin(FORWARD)
-    while not not controller_1.buttonL1.pressing(): # Button Stop mechanism 
+    while not not controller_1.buttonL1.pressing():
         wait(5, MSEC)
     FiringMotorGroup.set_stopping(HOLD)
     FiringMotorGroup.stop()
-    FiringMotorGroup.spin_to_position(90, DEGREES, wait=True)
-    # Add "Come back Motion" code
 
 def onevent_controller_1buttonL2_pressed_0():
     global myVariable, message1, ResetArm
@@ -96,8 +105,9 @@ def vexcode_driver_function():
 competition = Competition( vexcode_driver_function, vexcode_auton_function )
 
 # system event handlers
-controller_1.buttonB.pressed(onevent_controller_1buttonB_pressed_0)
 controller_1.buttonR2.pressed(onevent_controller_1buttonR2_pressed_0)
+controller_1.buttonB.pressed(onevent_controller_1buttonB_pressed_0)
+controller_1.buttonY.pressed(onevent_controller_1buttonY_pressed_0)
 controller_1.buttonR1.pressed(onevent_controller_1buttonR1_pressed_0)
 controller_1.buttonL1.pressed(onevent_controller_1buttonL1_pressed_0)
 controller_1.buttonL2.pressed(onevent_controller_1buttonL2_pressed_0)
